@@ -16,6 +16,11 @@ public enum CustomFeature
     SystemUser,
 
     /// <summary>
+    ///     Get UploadFile.
+    /// </summary>
+    UploadFile,
+
+    /// <summary>
     ///     Get Common.
     /// </summary>
     Common,
