@@ -8,6 +8,10 @@ using Comrade.Application.Services.SystemUserComponent.Commands;
 using Comrade.Application.Services.SystemUserComponent.Dtos;
 using Comrade.Application.Services.SystemUserComponent.Handlers;
 using Comrade.Application.Services.SystemUserComponent.Queries;
+using Comrade.Application.Services.UploadFileComponent.Commands;
+using Comrade.Application.Services.UploadFileComponent.Dtos;
+using Comrade.Application.Services.UploadFileComponent.Handlers;
+using Comrade.Application.Services.UploadFileComponent.Queries;
 using Comrade.Core.AirplaneCore;
 using Comrade.Core.AirplaneCore.Commands;
 using Comrade.Core.AirplaneCore.Handlers;
@@ -24,6 +28,11 @@ using Comrade.Core.SystemUserCore.Commands;
 using Comrade.Core.SystemUserCore.Handlers;
 using Comrade.Core.SystemUserCore.UseCases;
 using Comrade.Core.SystemUserCore.Validations;
+using Comrade.Core.UploadFileCore;
+using Comrade.Core.UploadFileCore.Commands;
+using Comrade.Core.UploadFileCore.Handlers;
+using Comrade.Core.UploadFileCore.UseCases;
+using Comrade.Core.UploadFileCore.Validations;
 using Comrade.Domain.Bases;
 using MediatR;
 
@@ -142,8 +151,53 @@ public static class UseCasesExtensions
         services.AddScoped<ISystemUserDeleteValidation, SystemUserDeleteValidation>();
         services.AddScoped<ISystemUserCreateValidation, SystemUserCreateValidation>();
 
+
+
+        #endregion
+
+        #region UploadFile
+
+        // Application - Services
+        services.AddScoped<IUploadFileCommand, UploadFileCommand>();
+        services.AddScoped<IUploadFileQuery, UploadFileQuery>();
+
+        // Application - Handlers
+        services
+            .AddScoped<IRequestHandler<UploadFileCreateDto, SingleResultDto<EntityDto>>,
+                UploadFileCreateHandler>();
+        services
+            .AddScoped<IRequestHandler<UploadFileEditDto, SingleResultDto<EntityDto>>,
+                UploadFileEditHandler>();
+
+        // Core - UseCases
+        services.AddScoped<IUcUploadFileEdit, UcUploadFileEdit>();
+        services.AddScoped<IUcUploadFileCreate, UcUploadFileCreate>();
+        services.AddScoped<IUcUploadFileDelete, UcUploadFileDelete>();
+
+        // Core - CoreHandlers
+        services
+            .AddScoped<IRequestHandler<UploadFileCreateCommand, ISingleResult<Entity>>,
+                UploadFileCreateCoreHandler>();
+        services
+            .AddScoped<IRequestHandler<UploadFileDeleteCommand, ISingleResult<Entity>>,
+                UploadFileDeleteCoreHandler>();
+        services
+            .AddScoped<IRequestHandler<UploadFileEditCommand, ISingleResult<Entity>>,
+                UploadFileEditCoreHandler>();
+
+
+        // Core - Validations
+        services
+            .AddScoped<IUploadFileForgotPasswordValidation, UploadFileForgotPasswordValidation>();
+        services.AddScoped<IUploadFilePasswordValidation, UploadFilePasswordValidation>();
+        services.AddScoped<IUploadFileEditValidation, UploadFileEditValidation>();
+        services.AddScoped<IUploadFileDeleteValidation, UploadFileDeleteValidation>();
+        services.AddScoped<IUploadFileCreateValidation, UploadFileCreateValidation>();
+
         #endregion
 
         return services;
+
+       
     }
 }

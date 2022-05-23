@@ -3,6 +3,6 @@ using MediatR;
 
 namespace Comrade.Application.Services.UploadFileComponent.Dtos;
 
-public class UploadFileCreateDto : UploadDto, IRequest<SingleResultDto<EntityDto>>
+public class UploadFileCreateDto : UploadFileDto, IRequest<SingleResultDto<EntityDto>>
 {
 }

@@ -2,9 +2,13 @@
 
 namespace Comrade.Application.Services.UploadFileComponent.Dtos;
 
-public class UploadDto : EntityDto
+public class UploadFileDto : EntityDto
 {
     public string? Info { get; set; }
+    public string? Name { get; set; }
+    public string? Email { get; set; }
+    public string? Registration { get; set; }
+    public DateTime? RegisterDate { get; set; }
 }
 
   

@@ -3,29 +3,28 @@ using Comrade.Api.Modules.Common;
 using Comrade.Api.Modules.Common.FeatureFlags;
 using Comrade.Application.Bases;
 using Comrade.Application.Paginations;
-using Comrade.Application.Services.SystemUserComponent.Commands;
-using Comrade.Application.Services.SystemUserComponent.Dtos;
-using Comrade.Application.Services.SystemUserComponent.Queries;
+using Comrade.Application.Services.UploadFileComponent.Commands;
 using Comrade.Application.Services.UploadFileComponent.Dtos;
+using Comrade.Application.Services.UploadFileComponent.Queries;
 using Microsoft.AspNetCore.Http;
 
-namespace Comrade.Api.UseCases.V1.SystemUserApi;
+namespace Comrade.Api.UseCases.V1.UploadFileApi;
 
 // [Authorize]
-[FeatureGate(CustomFeature.SystemUser)]
+[FeatureGate(CustomFeature.UploadFile)]
 [ApiVersion("1.0")]
 [Route("api/v{version:apiVersion}/[controller]")]
 [ApiController]
 public class UploadFileController : ControllerBase
 {
-    private readonly IUploadFileCommand _systemUserCommand;
-    private readonly ISystemUserQuery _systemUserQuery;
+    private readonly IUploadFileCommand _uploadFileCommand;
+    private readonly IUploadFileQuery _uploadFileQuery;
 
-    public UploadFileController(IUploadFileCommand systemUserCommand,
-        ISystemUserQuery systemUserQuery)
+    public UploadFileController(IUploadFileCommand uploadFileCommand,
+        IUploadFileQuery uploadFileQuery)
     {
-        _systemUserCommand = systemUserCommand;
-        _systemUserQuery = systemUserQuery;
+        _uploadFileCommand = uploadFileCommand;
+        _uploadFileQuery = uploadFileQuery;
     }
 
 
@@ -35,7 +34,7 @@ public class UploadFileController : ControllerBase
     {
         try
         {
-            var result = await _systemUserQuery.GetAll(paginationQuery).ConfigureAwait(false);
+            var result = await _uploadFileQuery.GetAll(paginationQuery).ConfigureAwait(false);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -46,13 +45,13 @@ public class UploadFileController : ControllerBase
     }
 
 
-    [HttpGet("get-by-id/{systemUserId:Guid}")]
+    [HttpGet("get-by-id/{uploadFileId:Guid}")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Find))]
-    public async Task<IActionResult> GetById([FromRoute] [Required] Guid systemUserId)
+    public async Task<IActionResult> GetById([FromRoute][Required] Guid uploadFileId)
     {
         try
         {
-            var result = await _systemUserQuery.GetByIdDefault(systemUserId).ConfigureAwait(false);
+            var result = await _uploadFileQuery.GetByIdDefault(uploadFileId).ConfigureAwait(false);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -62,17 +61,13 @@ public class UploadFileController : ControllerBase
         }
     }
 
-    [HttpPost("teste-post-gui")]
+    [HttpPost("create")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Create))]
-    public IActionResult TestePostGui([FromBody] [Required] UploadFileCreateDto dto)
+    public async Task<IActionResult> Create([FromBody][Required] UploadFileCreateDto dto)
     {
         try
         {
-            var result = new ResultDto();
-            result.Code = 200;
-            result.Message = dto.Info; //>tostring?
-            result.Success = true;
-
+            var result = await _uploadFileCommand.Create(dto).ConfigureAwait(false);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -84,11 +79,11 @@ public class UploadFileController : ControllerBase
 
     [HttpPut("edit")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Edit))]
-    public async Task<IActionResult> Edit([FromBody] [Required] SystemUserEditDto dto)
+    public async Task<IActionResult> Edit([FromBody][Required] UploadFileEditDto dto)
     {
         try
         {
-            var result = await _systemUserCommand.Edit(dto).ConfigureAwait(false);
+            var result = await _uploadFileCommand.Edit(dto).ConfigureAwait(false);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -98,13 +93,13 @@ public class UploadFileController : ControllerBase
         }
     }
 
-    [HttpDelete("delete/{systemUserId:int}")]
+    [HttpDelete("delete/{uploadFileId:int}")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Delete))]
-    public async Task<IActionResult> Delete([FromRoute] [Required] Guid systemUserId)
+    public async Task<IActionResult> Delete([FromRoute][Required] Guid uploadFileId)
     {
         try
         {
-            var result = await _systemUserCommand.Delete(systemUserId).ConfigureAwait(false);
+            var result = await _uploadFileCommand.Delete(uploadFileId).ConfigureAwait(false);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
