@@ -7,8 +7,5 @@ public class UploadFileEditValidation : UploadFileValidation<UploadFileEditDto>
 {
     public UploadFileEditValidation()
     {
-        ValidateInfo();
-        //ValidateEmail();
-        //ValidateRegistration();
     }
 }

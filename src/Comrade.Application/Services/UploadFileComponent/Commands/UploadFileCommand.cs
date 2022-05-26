@@ -1,9 +1,6 @@
 ﻿using Comrade.Application.Bases;
 using Comrade.Application.Bases.Interfaces;
-using Comrade.Application.Services.SystemUserComponent.Commands;
-using Comrade.Application.Services.SystemUserComponent.Dtos;
 using Comrade.Application.Services.UploadFileComponent.Dtos;
-using Comrade.Core.SystemUserCore;
 using Comrade.Core.UploadFileCore;
 using MediatR;
 

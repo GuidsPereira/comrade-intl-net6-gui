@@ -2,8 +2,6 @@
 using Comrade.Core.Bases.Interfaces;
 using Comrade.Core.Bases.Results;
 using Comrade.Core.Messages;
-using Comrade.Core.SystemUserCore.Commands;
-using Comrade.Core.SystemUserCore.Validations;
 using Comrade.Core.UploadFileCore.Commands;
 using Comrade.Core.UploadFileCore.Validations;
 using Comrade.Domain.Bases;
@@ -62,8 +60,14 @@ public class
 
     private static void HydrateValues(UploadFile target, UploadFile source)
     {
-        target.Name = source.Name;
-        target.Email = source.Email;
-        target.Registration = source.Registration;
+        target.Tipo = source.Tipo;
+        target.Data = source.Data;
+        target.Valor = source.Valor;
+        target.CPF = source.CPF;
+        target.Cartao = source.Cartao;
+        target.Hora = source.Hora;
+        target.DonoLoja = source.DonoLoja;
+        target.NomeLoja = source.NomeLoja;
+
     }
 }

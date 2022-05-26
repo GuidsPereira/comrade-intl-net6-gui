@@ -47,7 +47,7 @@ public class UploadFileController : ControllerBase
 
     [HttpGet("get-by-id/{uploadFileId:Guid}")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Find))]
-    public async Task<IActionResult> GetById([FromRoute][Required] Guid uploadFileId)
+    public async Task<IActionResult> GetById([FromRoute] [Required] Guid uploadFileId)
     {
         try
         {
@@ -61,12 +61,14 @@ public class UploadFileController : ControllerBase
         }
     }
 
-    [HttpPost("create")]
+    [HttpPost("teste-post-gui")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Create))]
-    public async Task<IActionResult> Create([FromBody][Required] UploadFileCreateDto dto)
+    public async Task<IActionResult> Create([FromBody] [Required] UploadFileCreateDto dto)
     {
         try
         {
+            
+
             var result = await _uploadFileCommand.Create(dto).ConfigureAwait(false);
             return StatusCode(result.Code, result);
         }
@@ -79,7 +81,7 @@ public class UploadFileController : ControllerBase
 
     [HttpPut("edit")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Edit))]
-    public async Task<IActionResult> Edit([FromBody][Required] UploadFileEditDto dto)
+    public async Task<IActionResult> Edit([FromBody] [Required] UploadFileEditDto dto)
     {
         try
         {
@@ -95,7 +97,7 @@ public class UploadFileController : ControllerBase
 
     [HttpDelete("delete/{uploadFileId:int}")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Delete))]
-    public async Task<IActionResult> Delete([FromRoute][Required] Guid uploadFileId)
+    public async Task<IActionResult> Delete([FromRoute] [Required] Guid uploadFileId)
     {
         try
         {

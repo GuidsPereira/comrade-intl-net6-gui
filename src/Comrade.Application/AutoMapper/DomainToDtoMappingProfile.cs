@@ -17,10 +17,10 @@ public class DomainToDtoMappingProfile : Profile
         CreateMap<Entity, EntityDto>();
         CreateMap<Lookup, LookupDto>();
         CreateMap<Airplane, AirplaneDto>();
-        CreateMap<SystemUser, SystemUserDto>();
-        CreateMap<SystemUser, AuthenticationDto>();
         CreateMap<UploadFile, UploadFileDto>();
-        CreateMap<UploadFile, AuthenticationDto>()
+        CreateMap<UploadFile, AuthenticationDto>();
+        CreateMap<SystemUser, SystemUserDto>();
+        CreateMap<SystemUser, AuthenticationDto>()
 
 
     .ForMember(dest => dest.Key, opt => opt.MapFrom(src => src.Id))

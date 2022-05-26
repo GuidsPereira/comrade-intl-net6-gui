@@ -29,8 +29,6 @@ public class UcUploadFileEdit : UseCase, IUcUploadFileEdit
 
     private static void HydrateValues(UploadFile target, UploadFile source)
     {
-        target.Name = source.Name;
-        target.Email = source.Email;
-        target.Registration = source.Registration;
+
     }
 }

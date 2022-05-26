@@ -7,4 +7,5 @@ namespace Comrade.Core.UploadFileCore.Commands;
 
 public class UploadFileCreateCommand : UploadFile, IRequest<ISingleResult<Entity>>
 {
+    public List<UploadFile> ListaInfo { get; set; }
 }
