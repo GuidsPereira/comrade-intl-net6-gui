@@ -61,15 +61,14 @@ public class UploadFileController : ControllerBase
         }
     }
 
-    [HttpPost("teste-post-gui")]
+    [HttpPost("create")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Create))]
     public async Task<IActionResult> Create([FromBody] [Required] UploadFileCreateDto dto)
     {
         try
         {
-            
-
             var result = await _uploadFileCommand.Create(dto).ConfigureAwait(false);
+
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
