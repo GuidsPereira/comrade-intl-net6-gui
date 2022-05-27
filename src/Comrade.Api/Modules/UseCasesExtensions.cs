@@ -4,20 +4,26 @@ using Comrade.Application.Services.AirplaneComponent.Dtos;
 using Comrade.Application.Services.AirplaneComponent.Handlers;
 using Comrade.Application.Services.AirplaneComponent.Queries;
 using Comrade.Application.Services.AuthenticationComponent.Commands;
+using Comrade.Application.Services.cnabFileComponent.Commands;
+using Comrade.Application.Services.CnabFileComponent.Commands;
+using Comrade.Application.Services.CnabFileComponent.Dtos;
+using Comrade.Application.Services.CnabFileComponent.Handlers;
+using Comrade.Application.Services.CnabFileComponent.Queries;
 using Comrade.Application.Services.SystemUserComponent.Commands;
 using Comrade.Application.Services.SystemUserComponent.Dtos;
 using Comrade.Application.Services.SystemUserComponent.Handlers;
 using Comrade.Application.Services.SystemUserComponent.Queries;
-using Comrade.Application.Services.UploadFileComponent.Commands;
-using Comrade.Application.Services.UploadFileComponent.Dtos;
-using Comrade.Application.Services.UploadFileComponent.Handlers;
-using Comrade.Application.Services.UploadFileComponent.Queries;
 using Comrade.Core.AirplaneCore;
 using Comrade.Core.AirplaneCore.Commands;
 using Comrade.Core.AirplaneCore.Handlers;
 using Comrade.Core.AirplaneCore.UseCases;
 using Comrade.Core.AirplaneCore.Validations;
 using Comrade.Core.Bases.Interfaces;
+using Comrade.Core.CnabFileCore;
+using Comrade.Core.CnabFileCore.Commands;
+using Comrade.Core.CnabFileCore.Handlers;
+using Comrade.Core.CnabFileCore.UseCases;
+using Comrade.Core.CnabFileCore.Validations;
 using Comrade.Core.SecurityCore;
 using Comrade.Core.SecurityCore.Commands;
 using Comrade.Core.SecurityCore.Handlers;
@@ -28,11 +34,6 @@ using Comrade.Core.SystemUserCore.Commands;
 using Comrade.Core.SystemUserCore.Handlers;
 using Comrade.Core.SystemUserCore.UseCases;
 using Comrade.Core.SystemUserCore.Validations;
-using Comrade.Core.UploadFileCore;
-using Comrade.Core.UploadFileCore.Commands;
-using Comrade.Core.UploadFileCore.Handlers;
-using Comrade.Core.UploadFileCore.UseCases;
-using Comrade.Core.UploadFileCore.Validations;
 using Comrade.Domain.Bases;
 using MediatR;
 
@@ -151,53 +152,49 @@ public static class UseCasesExtensions
         services.AddScoped<ISystemUserDeleteValidation, SystemUserDeleteValidation>();
         services.AddScoped<ISystemUserCreateValidation, SystemUserCreateValidation>();
 
-
-
         #endregion
 
-        #region UploadFile
+        #region CnabFile
 
         // Application - Services
-        services.AddScoped<IUploadFileCommand, UploadFileCommand>();
-        services.AddScoped<IUploadFileQuery, UploadFileQuery>();
+        services.AddScoped<ICnabFileCommand, CnabFileCommand>();
+        services.AddScoped<ICnabFileQuery, CnabFileQuery>();
 
         // Application - Handlers
         services
-            .AddScoped<IRequestHandler<UploadFileCreateDto, SingleResultDto<EntityDto>>,
-                UploadFileCreateHandler>();
+            .AddScoped<IRequestHandler<CnabFileCreateDto, SingleResultDto<EntityDto>>,
+                CnabFileCreateHandler>();
         services
-            .AddScoped<IRequestHandler<UploadFileEditDto, SingleResultDto<EntityDto>>,
-                UploadFileEditHandler>();
+            .AddScoped<IRequestHandler<CnabFileEditDto, SingleResultDto<EntityDto>>,
+                CnabFileEditHandler>();
 
         // Core - UseCases
-        services.AddScoped<IUcUploadFileEdit, UcUploadFileEdit>();
-        services.AddScoped<IUcUploadFileCreate, UcUploadFileCreate>();
-        services.AddScoped<IUcUploadFileDelete, UcUploadFileDelete>();
+        services.AddScoped<IUcCnabFileEdit, UcCnabFileEdit>();
+        services.AddScoped<IUcCnabFileCreate, UcCnabFileCreate>();
+        services.AddScoped<IUcCnabFileDelete, UcCnabFileDelete>();
 
         // Core - CoreHandlers
         services
-            .AddScoped<IRequestHandler<UploadFileCreateCommand, ISingleResult<Entity>>,
-                UploadFileCreateCoreHandler>();
+            .AddScoped<IRequestHandler<CnabFileCreateCommand, ISingleResult<Entity>>,
+                CnabFileCreateCoreHandler>();
         services
-            .AddScoped<IRequestHandler<UploadFileDeleteCommand, ISingleResult<Entity>>,
-                UploadFileDeleteCoreHandler>();
+            .AddScoped<IRequestHandler<CnabFileDeleteCommand, ISingleResult<Entity>>,
+                CnabFileDeleteCoreHandler>();
         services
-            .AddScoped<IRequestHandler<UploadFileEditCommand, ISingleResult<Entity>>,
-                UploadFileEditCoreHandler>();
+            .AddScoped<IRequestHandler<CnabFileEditCommand, ISingleResult<Entity>>,
+                CnabFileEditCoreHandler>();
 
 
         // Core - Validations
         services
-            .AddScoped<IUploadFileForgotPasswordValidation, UploadFileForgotPasswordValidation>();
-        services.AddScoped<IUploadFilePasswordValidation, UploadFilePasswordValidation>();
-        services.AddScoped<IUploadFileEditValidation, UploadFileEditValidation>();
-        services.AddScoped<IUploadFileDeleteValidation, UploadFileDeleteValidation>();
-        services.AddScoped<IUploadFileCreateValidation, UploadFileCreateValidation>();
+            .AddScoped<ICnabFileForgotPasswordValidation, CnabFileForgotPasswordValidation>();
+        services.AddScoped<ICnabFilePasswordValidation, CnabFilePasswordValidation>();
+        services.AddScoped<ICnabFileEditValidation, CnabFileEditValidation>();
+        services.AddScoped<ICnabFileDeleteValidation, CnabFileDeleteValidation>();
+        services.AddScoped<ICnabFileCreateValidation, CnabFileCreateValidation>();
 
         #endregion
 
         return services;
-
-       
     }
 }

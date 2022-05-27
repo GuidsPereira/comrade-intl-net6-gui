@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using Comrade.Application.Services.AirplaneComponent.Dtos;
 using Comrade.Application.Services.AuthenticationComponent.Dtos;
+using Comrade.Application.Services.CnabFileComponent.Dtos;
 using Comrade.Application.Services.SystemUserComponent.Dtos;
-using Comrade.Application.Services.UploadFileComponent.Dtos;
 using Comrade.Core.AirplaneCore.Commands;
+using Comrade.Core.CnabFileCore.Commands;
 using Comrade.Core.SecurityCore.Commands;
 using Comrade.Core.SystemUserCore.Commands;
-using Comrade.Core.UploadFileCore.Commands;
 using Comrade.Domain.Models;
 
 namespace Comrade.Application.AutoMapper;
@@ -18,14 +18,13 @@ public class DtoToDomainMappingProfile : Profile
         CreateMap<AirplaneDto, Airplane>();
         CreateMap<AirplaneCreateDto, AirplaneCreateCommand>();
         CreateMap<AirplaneEditDto, AirplaneEditCommand>();
-        CreateMap<UploadFileDto, UploadFile>();
-        CreateMap<UploadFileDto, UploadFileCreateCommand>();
-        CreateMap<UploadFileDto, UploadFileEditCommand>();
+        CreateMap<CnabFileDto, CnabFile>();
+        CreateMap<CnabFileDto, CnabFileCreateCommand>();
+        CreateMap<CnabFileDto, CnabFileEditCommand>();
         CreateMap<SystemUserDto, SystemUser>();
         CreateMap<SystemUserDto, SystemUserCreateCommand>();
         CreateMap<SystemUserDto, SystemUserEditCommand>();
         CreateMap<AuthenticationDto, SystemUser>()
-       
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Key))
             .ForMember(dest => dest.Password, opt => opt.MapFrom(src => src.Password));
         CreateMap<AuthenticationDto, UpdatePasswordCommand>()

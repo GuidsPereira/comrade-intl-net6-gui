@@ -16,9 +16,9 @@ public enum CustomFeature
     SystemUser,
 
     /// <summary>
-    ///     Get UploadFile.
+    ///     Get CnabFile.
     /// </summary>
-    UploadFile,
+    CnabFile,
 
     /// <summary>
     ///     Get Common.

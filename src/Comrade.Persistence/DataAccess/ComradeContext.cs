@@ -15,7 +15,7 @@ public class ComradeContext : DbContext
     // Tables
     public DbSet<Airplane> Airplanes { get; set; }
     public DbSet<SystemUser> SystemUsers { get; set; }
-    public DbSet<UploadFile> UploadFiles { get; set; }
+    public DbSet<CnabFile> CnabFiles { get; set; }
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

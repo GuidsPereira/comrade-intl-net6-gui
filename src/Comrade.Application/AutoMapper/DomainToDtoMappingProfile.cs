@@ -3,8 +3,8 @@ using Comrade.Application.Bases;
 using Comrade.Application.Lookups;
 using Comrade.Application.Services.AirplaneComponent.Dtos;
 using Comrade.Application.Services.AuthenticationComponent.Dtos;
+using Comrade.Application.Services.CnabFileComponent.Dtos;
 using Comrade.Application.Services.SystemUserComponent.Dtos;
-using Comrade.Application.Services.UploadFileComponent.Dtos;
 using Comrade.Domain.Bases;
 using Comrade.Domain.Models;
 
@@ -17,13 +17,11 @@ public class DomainToDtoMappingProfile : Profile
         CreateMap<Entity, EntityDto>();
         CreateMap<Lookup, LookupDto>();
         CreateMap<Airplane, AirplaneDto>();
-        CreateMap<UploadFile, UploadFileDto>();
-        CreateMap<UploadFile, AuthenticationDto>();
+        CreateMap<CnabFile, CnabFileDto>();
+        CreateMap<CnabFile, AuthenticationDto>();
         CreateMap<SystemUser, SystemUserDto>();
         CreateMap<SystemUser, AuthenticationDto>()
-
-
-    .ForMember(dest => dest.Key, opt => opt.MapFrom(src => src.Id))
+            .ForMember(dest => dest.Key, opt => opt.MapFrom(src => src.Id))
             .ForMember(dest => dest.Password, opt => opt.MapFrom(src => src.Password));
     }
 }
