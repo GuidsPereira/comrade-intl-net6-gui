@@ -4,7 +4,7 @@ namespace Comrade.Application.Services.CnabFileComponent.Dtos;
 
 public class CnabFileDto : EntityDto
 {
-    public string?[] Info { get; set; }
+    public string? Info { get; set; } = null!;
     public string? Tipo { get; set; }
     public string? Data { get; set; }
     public string? Valor { get; set; }
