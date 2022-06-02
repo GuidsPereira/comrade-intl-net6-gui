@@ -33,6 +33,21 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="log20220509.txt" />
+	  <None Remove="log20220517.txt" />
+	  <None Remove="log20220518.txt" />
+	  <None Remove="log20220520.txt" />
+	  <None Remove="log20220523.txt" />
+	  <None Remove="log20220524.txt" />
+	  <None Remove="log20220525.txt" />
+	  <None Remove="log20220526.txt" />
+	  <None Remove="log20220527.txt" />
+	  <None Remove="log20220530.txt" />
+	  <None Remove="log20220531.txt" />
+	  <None Remove="log20220601.txt" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="10.4.0" />
 		<PackageReference Include="MediatR" Version="10.0.1" />
 		<PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />

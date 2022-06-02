@@ -24,6 +24,7 @@ using Comrade.Core.CnabFileCore.Commands;
 using Comrade.Core.CnabFileCore.Handlers;
 using Comrade.Core.CnabFileCore.UseCases;
 using Comrade.Core.CnabFileCore.Validations;
+using Comrade.Core.CnabFileManyCore.Validations;
 using Comrade.Core.SecurityCore;
 using Comrade.Core.SecurityCore.Commands;
 using Comrade.Core.SecurityCore.Handlers;
@@ -159,19 +160,31 @@ public static class UseCasesExtensions
         // Application - Services
         services.AddScoped<ICnabFileCommand, CnabFileCommand>();
         services.AddScoped<ICnabFileQuery, CnabFileQuery>();
+        services.AddScoped<ICnabFileManyCommand, CnabFileManyCommand>();
+        services.AddScoped<ICnabFileManyQuery, CnabFileManyQuery>();
 
         // Application - Handlers
         services
             .AddScoped<IRequestHandler<CnabFileCreateDto, SingleResultDto<EntityDto>>,
                 CnabFileCreateHandler>();
+
         services
             .AddScoped<IRequestHandler<CnabFileEditDto, SingleResultDto<EntityDto>>,
                 CnabFileEditHandler>();
+        services
+            .AddScoped<IRequestHandler<CnabFileManyCreateDto, SingleResultDto<EntityDto>>,
+                CnabFileManyCreateHandler>();
+        services
+            .AddScoped<IRequestHandler<CnabFileManyEditDto, SingleResultDto<EntityDto>>,
+                CnabFileManyEditHandler>();
 
         // Core - UseCases
         services.AddScoped<IUcCnabFileEdit, UcCnabFileEdit>();
         services.AddScoped<IUcCnabFileCreate, UcCnabFileCreate>();
         services.AddScoped<IUcCnabFileDelete, UcCnabFileDelete>();
+        services.AddScoped<IUcCnabFileManyEdit, UcCnabFileManyEdit>();
+        services.AddScoped<IUcCnabFileManyCreate, UcCnabFileManyCreate>();
+        services.AddScoped<IUcCnabFileManyDelete, UcCnabFileManyDelete>();
 
         // Core - CoreHandlers
         services
@@ -183,6 +196,15 @@ public static class UseCasesExtensions
         services
             .AddScoped<IRequestHandler<CnabFileEditCommand, ISingleResult<Entity>>,
                 CnabFileEditCoreHandler>();
+        services
+            .AddScoped<IRequestHandler<CnabFileManyCreateCommand, ISingleResult<Entity>>,
+                CnabFileManyCreateCoreHandler>();
+        services
+            .AddScoped<IRequestHandler<CnabFileManyDeleteCommand, ISingleResult<Entity>>,
+                CnabFileManyDeleteCoreHandler>();
+        services
+            .AddScoped<IRequestHandler<CnabFileManyEditCommand, ISingleResult<Entity>>,
+                CnabFileManyEditCoreHandler>();
 
 
         // Core - Validations
@@ -192,6 +214,12 @@ public static class UseCasesExtensions
         services.AddScoped<ICnabFileEditValidation, CnabFileEditValidation>();
         services.AddScoped<ICnabFileDeleteValidation, CnabFileDeleteValidation>();
         services.AddScoped<ICnabFileCreateValidation, CnabFileCreateValidation>();
+        services
+            .AddScoped<ICnabFileManyForgotPasswordValidation, CnabFileManyForgotPasswordValidation>();
+        services.AddScoped<ICnabFileManyPasswordValidation, CnabFileManyPasswordValidation>();
+        services.AddScoped<ICnabFileManyEditValidation, CnabFileManyEditValidation>();
+        services.AddScoped<ICnabFileManyDeleteValidation, CnabFileManyDeleteValidation>();
+        services.AddScoped<ICnabFileManyCreateValidation, CnabFileManyCreateValidation>();
 
         #endregion
 

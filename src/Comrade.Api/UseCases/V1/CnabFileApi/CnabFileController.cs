@@ -18,14 +18,18 @@ namespace Comrade.Api.UseCases.V1.CnabFileApi;
 [ApiController]
 public class CnabFileController : ComradeController
 {
-    private readonly ICnabFileCommand _CnabFileCommand;
-    private readonly ICnabFileQuery _CnabFileQuery;
+    private readonly ICnabFileCommand _cnabFileCommand;
+    private readonly ICnabFileQuery _cnabFileQuery;
+    private readonly ICnabFileManyCommand _cnabFileManyCommand;
+    private readonly ICnabFileManyQuery _cnabFileManyQuery;
 
     public CnabFileController(ICnabFileCommand cnabFileCommand,
-        ICnabFileQuery cnabFileQuery)
+        ICnabFileQuery cnabFileQuery, ICnabFileManyCommand cnabFileManyCommand, ICnabFileManyQuery cnabFileManyQuery)
     {
-        _CnabFileCommand = cnabFileCommand;
-        _CnabFileQuery = cnabFileQuery;
+        _cnabFileCommand = cnabFileCommand;
+        _cnabFileQuery = cnabFileQuery;
+        _cnabFileManyCommand = cnabFileManyCommand;
+        _cnabFileManyQuery = cnabFileManyQuery;
     }
 
 
@@ -35,7 +39,7 @@ public class CnabFileController : ComradeController
     {
         try
         {
-            var result = await _CnabFileQuery.GetAll(paginationQuery).ConfigureAwait(false);
+            var result = await _cnabFileQuery.GetAll(paginationQuery).ConfigureAwait(false);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -52,7 +56,24 @@ public class CnabFileController : ComradeController
     {
         try
         {
-            var result = await _CnabFileQuery.GetByIdDefault(cnabFileId).ConfigureAwait(false);
+            var result = await _cnabFileQuery.GetByIdDefault(cnabFileId).ConfigureAwait(false);
+            return StatusCode(result.Code, result);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError,
+                new SingleResultDto<EntityDto>(e));
+        }
+    }
+
+    [HttpPost("create-many")]
+    [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Create))]
+    public async Task<IActionResult> CreateMany([FromBody] [Required] CnabFileManyCreateDto dto)
+    {
+        try
+        {
+            var result = await _cnabFileManyCommand.Create(dto).ConfigureAwait(false);
+
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -68,7 +89,7 @@ public class CnabFileController : ComradeController
     {
         try
         {
-            var result = await _CnabFileCommand.Create(dto).ConfigureAwait(false);
+            var result = await _cnabFileCommand.Create(dto).ConfigureAwait(false);
 
             return StatusCode(result.Code, result);
         }
@@ -79,13 +100,14 @@ public class CnabFileController : ComradeController
         }
     }
 
+
     [HttpPut("edit")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Edit))]
     public async Task<IActionResult> Edit([FromBody] [Required] CnabFileEditDto dto)
     {
         try
         {
-            var result = await _CnabFileCommand.Edit(dto).ConfigureAwait(false);
+            var result = await _cnabFileCommand.Edit(dto).ConfigureAwait(false);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
@@ -101,7 +123,7 @@ public class CnabFileController : ComradeController
     {
         try
         {
-            var result = await _CnabFileCommand.Delete(cnabFileId).ConfigureAwait(false);
+            var result = await _cnabFileCommand.Delete(cnabFileId).ConfigureAwait(false);
             return StatusCode(result.Code, result);
         }
         catch (Exception e)
