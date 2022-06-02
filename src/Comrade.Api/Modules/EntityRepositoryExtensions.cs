@@ -22,6 +22,7 @@ public static class EntityRepositoryExtensions
         services.AddScoped<IAirplaneRepository, AirplaneRepository>();
         services.AddScoped<ISystemUserRepository, SystemUserRepository>();
         services.AddScoped<ICnabFileRepository, CnabFileRepository>();
+        services.AddScoped<ICnabFileManyRepository, CnabFileManyRepository>();
 
         return services;
     }
