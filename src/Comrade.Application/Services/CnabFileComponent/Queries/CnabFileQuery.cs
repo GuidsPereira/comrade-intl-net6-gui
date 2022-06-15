@@ -49,9 +49,9 @@ public class CnabFileQuery : ICnabFileQuery
         return new PageResultDto<CnabFileDto>(paginationFilter, list);
     }
 
-    public async Task<ListResultDto<LookupDto>> FindByName(string name)
+    public async Task<ListResultDto<LookupDto>> FindByTipo(string tipo)
     {
-        var list = await Task.Run(() => _repository.FindByName(name)
+        var list = await Task.Run(() => _repository.FindByTipo(tipo)
             .ProjectTo<LookupDto>(_mapper.ConfigurationProvider)
             .ToList()).ConfigureAwait(false);
 

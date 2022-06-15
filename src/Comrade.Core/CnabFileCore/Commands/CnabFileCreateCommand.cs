@@ -7,5 +7,4 @@ namespace Comrade.Core.CnabFileCore.Commands;
 
 public class CnabFileCreateCommand : CnabFile, IRequest<ISingleResult<Entity>>
 {
-    public List<CnabFile> InfoLista { get; set; }
 }

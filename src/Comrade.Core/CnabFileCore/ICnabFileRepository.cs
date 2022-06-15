@@ -6,5 +6,5 @@ namespace Comrade.Core.CnabFileCore;
 
 public interface ICnabFileRepository : IRepository<CnabFile>
 {
-    IQueryable<Lookup>? FindByName(string name);
+    IQueryable<Lookup>? FindByTipo(string tipo);
 }

@@ -19,5 +19,6 @@ public class UcCnabFileDelete : UseCase, IUcCnabFileDelete
     {
         var entity = new CnabFileDeleteCommand { Id = id };
         return await _mediator.Send(entity).ConfigureAwait(false);
+        return null;
     }
 }

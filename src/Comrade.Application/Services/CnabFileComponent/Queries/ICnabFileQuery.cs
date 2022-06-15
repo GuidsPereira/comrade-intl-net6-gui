@@ -11,5 +11,5 @@ public interface ICnabFileQuery
     Task<IPageResultDto<CnabFileDto>> GetAll(PaginationQuery? paginationQuery = null);
     Task<ISingleResultDto<CnabFileDto>> GetByIdDefault(Guid id);
     Task<ISingleResultDto<CnabFileDto>> GetByIdMongo(Guid id);
-    Task<ListResultDto<LookupDto>> FindByName(string name);
+    Task<ListResultDto<LookupDto>> FindByTipo(string tipo);
 }

@@ -5,17 +5,23 @@ namespace Comrade.Domain.Models;
 [Table("cnabfile_cnab_file")]
 public class CnabFile : Entity
 {
+    public CnabFile(Guid id, string tipo, string data, string donoLoja, string nomeLoja, string cartao, string cpf,
+        string hora, string valor)
+    {
+        Id = id;
+        Tipo = tipo;
+        Data = data;
+        Valor = valor;
+        CPF = cpf;
+        Cartao = cartao;
+        Hora = hora;
+        DonoLoja = donoLoja;
+        NomeLoja = nomeLoja;
+        Password = "";
+    }
+
     public CnabFile()
     {
-        Tipo = "";
-        Data = "";
-        Valor = "";
-        CPF = "";
-        Cartao = "";
-        Hora = "";
-        DonoLoja = "";
-        NomeLoja = "";
-        Password = "";
     }
 
     [Column("cnabfile_tx_tipo", TypeName = "varchar")]

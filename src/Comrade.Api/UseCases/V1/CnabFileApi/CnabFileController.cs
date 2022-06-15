@@ -66,6 +66,22 @@ public class CnabFileController : ComradeController
         }
     }
 
+    [HttpGet("lookup-cnab-file-by-tipo/{tipo}")]
+    [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.List))]
+    public async Task<IActionResult> GetLookupCnabFileByTipo(string tipo)
+    {
+        try
+        {
+            var result = await _cnabFileQuery.FindByTipo(tipo).ConfigureAwait(false);
+            return StatusCode(result.Code, result);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError,
+                new SingleResultDto<EntityDto>(e));
+        }
+    }
+
     [HttpPost("create-many")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Create))]
     public async Task<IActionResult> CreateMany([FromBody] [Required] CnabFileManyCreateDto dto)
@@ -117,7 +133,7 @@ public class CnabFileController : ComradeController
         }
     }
 
-    [HttpDelete("delete/{cnabFileId:int}")]
+    [HttpDelete("delete/{cnabFileId:Guid}")]
     [ApiConventionMethod(typeof(CustomApiConventions), nameof(CustomApiConventions.Delete))]
     public async Task<IActionResult> Delete([FromRoute] [Required] Guid cnabFileId)
     {
